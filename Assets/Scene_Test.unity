@@ -160,6 +160,10 @@ Prefab:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90.00001
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 23ed0ce4028eb9b41b55414578005c84, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7ed5a016da394ed4cb81855ed1d2ad1e, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 23ed0ce4028eb9b41b55414578005c84, type: 3}
   m_IsPrefabParent: 0
@@ -2116,6 +2120,10 @@ Prefab:
       propertyPath: m_Name
       value: Etralian_Manikin_Bust (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 23ed0ce4028eb9b41b55414578005c84, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7ed5a016da394ed4cb81855ed1d2ad1e, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 23ed0ce4028eb9b41b55414578005c84, type: 3}
   m_IsPrefabParent: 0
@@ -3115,8 +3123,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 4, z: 1}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!33 &957749917
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4453,8 +4461,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 4, z: 1}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!33 &1448257935
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4803,8 +4811,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 4, z: 1}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!33 &1481079789
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -4947,6 +4955,10 @@ Prefab:
       propertyPath: m_Name
       value: Etralian_Manikin_Bust (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 23ed0ce4028eb9b41b55414578005c84, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7ed5a016da394ed4cb81855ed1d2ad1e, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 23ed0ce4028eb9b41b55414578005c84, type: 3}
   m_IsPrefabParent: 0
@@ -5096,8 +5108,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 4, z: 1}
+  m_Center: {x: 0, y: 1.5, z: 0}
 --- !u!33 &1567348610
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -5150,7 +5162,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: fc9afae647b86a4408d565c81944a4df, type: 2}
+  - {fileID: 2100000, guid: 7ed5a016da394ed4cb81855ed1d2ad1e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5253,6 +5265,10 @@ Prefab:
       propertyPath: m_Name
       value: Etralian_Manikin_Bust (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2300000, guid: 23ed0ce4028eb9b41b55414578005c84, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7ed5a016da394ed4cb81855ed1d2ad1e, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 23ed0ce4028eb9b41b55414578005c84, type: 3}
   m_IsPrefabParent: 0
@@ -5585,11 +5601,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_WalkSpeed
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_RunSpeed
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_CrouchHeight
@@ -5606,6 +5622,22 @@ Prefab:
     - target: {fileID: 14300000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_StickToGroundForce
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 11400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_GravityMultiplier
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 14300000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_Radius
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5400000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+      propertyPath: m_Interpolate
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
@@ -5642,7 +5674,7 @@ MeshRenderer:
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_Materials:
-  - {fileID: 2100000, guid: fc9afae647b86a4408d565c81944a4df, type: 2}
+  - {fileID: 2100000, guid: 7ed5a016da394ed4cb81855ed1d2ad1e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
