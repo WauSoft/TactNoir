@@ -284,18 +284,18 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
         }
 
-        private void Crouch()
+       private void Crouch()
         {
-            var collider = GetComponent<BoxCollider>();
-            collider.size -= new Vector3(0, m_CrouchHeight, 0);
+            var collider = GetComponent<CharacterController>().GetComponent<CapsuleCollider>();
+            collider.height -=  m_CrouchHeight;
             collider.center -= new Vector3(0, m_CrouchHeight / 2, 0);
             m_Crouching = true;
         }
 
         private void UnCrouch()
         {
-            var collider = GetComponent<BoxCollider>();
-            collider.size += new Vector3(0, m_CrouchHeight, 0);
+            var collider = GetComponent<CharacterController>().GetComponent<CapsuleCollider>();
+            collider.height += m_CrouchHeight;
             collider.center += new Vector3(0, m_CrouchHeight / 2, 0);
             m_Crouching = false;
         }
