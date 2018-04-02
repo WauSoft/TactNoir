@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 7e0bfc0f796aee941958c3bc18f9bc20
+timeCreated: 1522678300
+licenseType: Free
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - FPSController: {fileID: 100000, guid: 5e9e851c0e142814dac026a256ba2ac0, type: 2}
+  - Elevator: {fileID: 100004, guid: 359c116bb1878c4409060fca578907b4, type: 3}
+  - M_Corp_Elevator: {fileID: 100004, guid: 359c116bb1878c4409060fca578907b4, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
