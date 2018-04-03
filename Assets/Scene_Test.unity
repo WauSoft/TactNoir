@@ -2477,7 +2477,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 17ece506b1a2110429a246ebb87b2a19, type: 3}
@@ -2771,15 +2771,15 @@ Light:
   serializedVersion: 8
   m_Type: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.6
-  m_Range: 450
-  m_SpotAngle: 59.8
+  m_Intensity: 4
+  m_Range: 40
+  m_SpotAngle: 62.5
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 0.858
+    m_Strength: 0.98
     m_Bias: 0
     m_NormalBias: 0.18
     m_NearPlane: 0.1
@@ -7061,7 +7061,7 @@ MeshCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: 17ece506b1a2110429a246ebb87b2a19, type: 3}
