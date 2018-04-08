@@ -58,6 +58,7 @@ ModelImporter:
     100100: R_Wrist
     100102: R_Wrist_Rotator_Bone
     100104: Root001
+    100106: M_FP_Arms
     400000: Arms_Mesh
     400002: //RootNode
     400004: L_Collarbone
@@ -111,14 +112,17 @@ ModelImporter:
     400100: R_Wrist
     400102: R_Wrist_Rotator_Bone
     400104: Root001
+    400106: M_FP_Arms
     2100000: 'Material #25'
     4300000: Arms_Mesh
+    4300002: M_FP_Arms
     7400000: Idle
     7400002: Idle
     7400004: Aim
     7400006: Draw
     9500000: //RootNode
     13700000: Arms_Mesh
+    13700002: M_FP_Arms
   externalObjects: {}
   materials:
     importMaterials: 1
