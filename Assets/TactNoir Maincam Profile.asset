@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: TactNoir Maincam Profile
   m_EditorClassIdentifier: 
   debugViews:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       mode: 0
       depth:
@@ -97,14 +97,14 @@ MonoBehaviour:
       logMin: -8
       logMax: 4
   bloom:
-    m_Enabled: 0
+    m_Enabled: 1
     m_Settings:
       bloom:
-        intensity: 0.5
+        intensity: 1
         threshold: 1.1
-        softKnee: 0.5
-        radius: 4
-        antiFlicker: 0
+        softKnee: 0.984
+        radius: 4.58
+        antiFlicker: 1
       lensDirt:
         texture: {fileID: 0}
         intensity: 3
