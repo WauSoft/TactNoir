@@ -13,14 +13,15 @@ public class Player : MonoBehaviour {
     [SerializeField] float crouchSpeed;
     
     // Private values
-    private bool CanJump;
+    public bool CanJump;
     private bool IsMoving;
     private bool IsCrouching;
+    private bool HeadHit;
     public bool IsRunning;
     public bool ToggleRun;
     public bool ToggleCrouch;
     private Vector3 moveDirection;
-    private float controllerHeight = 1.8f;
+    private float controllerHeight = 2f;
 
     InputController playerInput;
 
@@ -52,6 +53,12 @@ public class Player : MonoBehaviour {
     // Movement properties
     void Move()
     {
+        // Converts Joycon trigger axis to button equivalent
+        if (playerInput.JoyCrouch == 1f && !playerInput.Crouch)
+            playerInput.Crouch = true;
+        if (playerInput.JoyCrouch < 1f && !playerInput.Crouch)
+            playerInput.Crouch = false;
+        
         // Toggles between default run or default walk
         if (playerInput.ToggleRun)
         {
@@ -78,6 +85,8 @@ public class Player : MonoBehaviour {
         if (ToggleRun && !playerInput.Run) // Makes sure the player isn't running while crouched
             if(!IsCrouching)
             moveSpeed = runSpeed;
+        if (!IsCrouching && HeadHit && CanJump) // If currently under crouch roof, keep the speed to crouch regardless
+            moveSpeed = crouchSpeed;
         
         // CharacterController move direction based on input
         float yStore = moveDirection.y;
@@ -89,7 +98,7 @@ public class Player : MonoBehaviour {
         // Jump function - uses the yStore to calculate Y movement
         CanJump = (controller.isGrounded);
 
-        if (CanJump)
+        if (CanJump && !HeadHit)
         {
             moveDirection.y = 0f;
             if (playerInput.Jump)
@@ -101,29 +110,43 @@ public class Player : MonoBehaviour {
         moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale);
         controller.Move(moveDirection * Time.deltaTime);
 
-        // Toggle Crouch function (Does not currently work)
+        // Toggle crouch by default
         if (playerInput.ToggleCrouch && !playerInput.Crouch)
         {
-            if (!IsCrouching)
+            if (!ToggleCrouch)
             {
-                IsCrouching = true;
+                ToggleCrouch = true;
             }
-            if (IsCrouching)
+            else
             {
-                IsCrouching = false;
+                ToggleCrouch = false;
             }
         }
 
         // Hold to crouch
         if (playerInput.Crouch && !playerInput.ToggleCrouch)
             IsCrouching = true;
-        else
+        if (!playerInput.Crouch && !playerInput.ToggleCrouch)
             IsCrouching = false;
+        // Toggle to crouch
+        if (ToggleCrouch && !playerInput.Crouch)
+            IsCrouching = true;
+        if (!ToggleCrouch && !playerInput.Crouch)
+            IsCrouching = false;
+
+        // Value for Raycast direction
+        Vector3 up = transform.TransformDirection(Vector3.up);
+        
+        // Raycast checks for overhead collision
+        if (Physics.Raycast(transform.position, up, 2f))
+            HeadHit = true;
+        else
+            HeadHit = false;
 
         // Scales the capsule of the CharacterController component when crouched
         if (IsCrouching)
             controller.height = crouchHeight;
-        if (!IsCrouching)
+        if (!IsCrouching && !HeadHit)
             controller.height = controllerHeight;
 
     }

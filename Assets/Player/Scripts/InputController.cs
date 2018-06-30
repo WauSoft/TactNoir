@@ -13,6 +13,7 @@ public class InputController : MonoBehaviour {
     public bool Jump;
     public bool Run;
     public bool Crouch;
+    public float JoyCrouch;
     public bool ToggleRun;
     public bool ToggleCrouch;
 	
@@ -28,6 +29,7 @@ public class InputController : MonoBehaviour {
         Run = Input.GetButton("Run");
         ToggleRun = Input.GetButtonDown("ToggleRun");
         Crouch = Input.GetButton("Crouch");
+        JoyCrouch = Input.GetAxis("Crouch");
         ToggleCrouch = Input.GetButtonDown("ToggleCrouch");
 	}
 
