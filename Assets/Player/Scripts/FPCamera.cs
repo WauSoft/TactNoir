@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class FPCamera : MonoBehaviour {
 
-    //Editor adjustable values
+    // Editor adjustable values
     [SerializeField] float xSensitivity;
     [SerializeField] float ySensitivity;
     [SerializeField] float maxViewAngle;
     [SerializeField] float minViewAngle;
 
     public Vector3 offset;
-    public Transform target; //Target for camera to affix itself to
-    public Transform pivot; //Pivot that the camera rotates around
+    public Transform target; // Target for camera to affix itself to
+    public Transform pivot; // Pivot that the camera rotates around
 
     public bool LockMouse;
 
-    //Initialization
+    // Initialization
     void Start ()
     {
-        //Sets the offset to the target
+        // Sets the offset to the target
         offset = target.position - transform.position;
-        //Hides cursor and locks mouse to window when the game starts
+        // Hides cursor and locks mouse to window when the game starts
         if (LockMouse)
         {
             Cursor.visible = false;
@@ -39,29 +39,28 @@ public class FPCamera : MonoBehaviour {
         float vertical = Input.GetAxis("Mouse Y") * ySensitivity;
         pivot.Rotate(-vertical, 0f, 0f);
 
-        // Vertical look limit UP (Not entirely functional - camera inverts when it exceeds limit)
+        // Vertical look limit UP
         if(pivot.rotation.eulerAngles.x > maxViewAngle && pivot.rotation.eulerAngles.x < 180f)
         {
-            pivot.rotation = Quaternion.Euler(maxViewAngle, 0f, 0f);
-            transform.rotation = Quaternion.Euler(maxViewAngle, 0f, 0f);
+            pivot.rotation = Quaternion.Euler(maxViewAngle, transform.rotation.eulerAngles.y, 0);
         }
-        // Vertical look limit DOWN (Not entirely functional - camera inverts when it exceeds limit)
+        // Vertical look limit DOWN
         if (pivot.rotation.eulerAngles.x > 180f && pivot.rotation.eulerAngles.x < 360f + minViewAngle)
         {
-            pivot.rotation = Quaternion.Euler(360f + minViewAngle, 0f, 0f);
-            transform.rotation = Quaternion.Euler(360f + minViewAngle, 0f, 0f);
+            pivot.rotation = Quaternion.Euler(360f + minViewAngle, transform.rotation.eulerAngles.y, 0);
         }
 
         // Sets desired angles for target and pivot
-        float desiredYAngle = target.eulerAngles.y;
+        float desiredYAngle = pivot.eulerAngles.y;
         float desiredXAngle = pivot.eulerAngles.x;
 
         // Applies the values in Quaternion Euler (X,Y,Z) axes
         Quaternion rotation = Quaternion.Euler(desiredXAngle, desiredYAngle, 0f);
 
         // Applies the Quaternion rotations to desired objects
-        transform.position = target.position - (rotation * offset);
+        transform.position = pivot.position - (rotation * offset);
         transform.rotation = rotation;
+
 	}
 
 }

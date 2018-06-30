@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour {
 
-    //Editor adjustable properties
+    // Editor adjustable properties
     [SerializeField] float walkSpeed;
     [SerializeField] float runSpeed;
     [SerializeField] float jumpForce;
@@ -12,16 +12,19 @@ public class Player : MonoBehaviour {
     [SerializeField] float crouchHeight;
     [SerializeField] float crouchSpeed;
     
-    //Private values
+    // Private values
     private bool CanJump;
     private bool IsMoving;
     private bool IsCrouching;
+    public bool IsRunning;
+    public bool ToggleRun;
+    public bool ToggleCrouch;
     private Vector3 moveDirection;
     private float controllerHeight = 1.8f;
 
     InputController playerInput;
 
-    //Reference the component CharacterController
+    // Reference the component CharacterController
     private CharacterController m_controller;
     public CharacterController controller
     {
@@ -33,9 +36,10 @@ public class Player : MonoBehaviour {
         }
     }
 
-	//Initialization
+	// Initialization
 	void Awake ()
     {
+        // Gets the input functions from InputController.cs
         playerInput = GameManager.Instance.InputController;
 	}
 	
@@ -48,20 +52,41 @@ public class Player : MonoBehaviour {
     // Movement properties
     void Move()
     {
-        //Move speeds
-        float moveSpeed = walkSpeed;
-        if (playerInput.Run && !IsCrouching)
+        // Toggles between default run or default walk
+        if (playerInput.ToggleRun)
+        {
+            if (!ToggleRun)
+            {
+                ToggleRun = true;
+            }
+            else
+            {
+                ToggleRun = false;
+            }
+        }
+        // Move speeds with run toggle
+        float moveSpeed = walkSpeed; // Default movement
+        if (playerInput.Run && !IsCrouching) // When run button is pressed
+            if(!ToggleRun)
+                moveSpeed = runSpeed; // Set run speed
+            if (ToggleRun)
+                moveSpeed = walkSpeed; // Walks if run button is used while run is toggled
+            if (IsCrouching)
+                moveSpeed = crouchSpeed; // Cancels out the run call if crouched
+        if (playerInput.Crouch && controller.isGrounded) // When crouch button is pressed
+            moveSpeed = crouchSpeed; // Set crouch speed
+        if (ToggleRun && !playerInput.Run) // Makes sure the player isn't running while crouched
+            if(!IsCrouching)
             moveSpeed = runSpeed;
-        if (playerInput.Crouch && controller.isGrounded)
-            moveSpeed = crouchSpeed;
         
-        //CharacterController move direction based on input
+        // CharacterController move direction based on input
         float yStore = moveDirection.y;
         moveDirection = (transform.forward * GameManager.Instance.InputController.Vertical) + (transform.right * GameManager.Instance.InputController.Horizontal);
         moveDirection = moveDirection.normalized * moveSpeed;
         moveDirection.y = yStore;
 
-        //Jump function - uses the yStore to calculate Y movement
+
+        // Jump function - uses the yStore to calculate Y movement
         CanJump = (controller.isGrounded);
 
         if (CanJump)
@@ -72,22 +97,34 @@ public class Player : MonoBehaviour {
                 moveDirection.y = jumpForce;
             }
         }
-        //Jump physics calculation
+        // Jump physics calculation
         moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale);
         controller.Move(moveDirection * Time.deltaTime);
 
-        //Toggle Crouch function and scales the capsule of the CharacterController component
-        if (playerInput.Crouch)
+        // Toggle Crouch function (Does not currently work)
+        if (playerInput.ToggleCrouch && !playerInput.Crouch)
+        {
             if (!IsCrouching)
             {
-                controller.height = crouchHeight;
                 IsCrouching = true;
             }
-            else
+            if (IsCrouching)
             {
-                controller.height = controllerHeight;
                 IsCrouching = false;
             }
+        }
+
+        // Hold to crouch
+        if (playerInput.Crouch && !playerInput.ToggleCrouch)
+            IsCrouching = true;
+        else
+            IsCrouching = false;
+
+        // Scales the capsule of the CharacterController component when crouched
+        if (IsCrouching)
+            controller.height = crouchHeight;
+        if (!IsCrouching)
+            controller.height = controllerHeight;
 
     }
 
