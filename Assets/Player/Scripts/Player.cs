@@ -12,16 +12,18 @@ public class Player : MonoBehaviour {
     [SerializeField] float crouchHeight;
     [SerializeField] float crouchSpeed;
     
-    // Private values
-    public bool CanJump;
+    // Private variables
+    private bool CanJump;
     private bool IsMoving;
     private bool IsCrouching;
     private bool HeadHit;
-    public bool IsRunning;
-    public bool ToggleRun;
-    public bool ToggleCrouch;
+    private bool IsRunning;
+    private bool ToggleRun;
+    private bool ToggleCrouch;
+
     private Vector3 moveDirection;
     private float controllerHeight = 2f;
+    public Animator animator;
 
     InputController playerInput;
 
@@ -48,19 +50,28 @@ public class Player : MonoBehaviour {
 	void Update ()
     {
         Move();
+        Actions();
+        Animations();
 	}
 
     // Movement properties
     void Move()
     {
         // Converts Joycon trigger axis to button equivalent
+        // Crouch RT to button
         if (playerInput.JoyCrouch == 1f && !playerInput.Crouch)
             playerInput.Crouch = true;
         if (playerInput.JoyCrouch < 1f && !playerInput.Crouch)
             playerInput.Crouch = false;
-        
-        // Toggles between default run or default walk
-        if (playerInput.ToggleRun)
+        // Ready LT to button
+        if (playerInput.JoyReadyItem == 1f && !playerInput.ReadyItem)
+            playerInput.ReadyItem = true;
+        if (playerInput.JoyReadyItem < 1f && !playerInput.ReadyItem)
+            playerInput.ReadyItem = false;
+
+            // MOVEMENT
+            // Toggles between default run or default walk
+            if (playerInput.ToggleRun)
         {
             if (!ToggleRun)
             {
@@ -94,7 +105,7 @@ public class Player : MonoBehaviour {
         moveDirection = moveDirection.normalized * moveSpeed;
         moveDirection.y = yStore;
 
-
+        // JUMPING
         // Jump function - uses the yStore to calculate Y movement
         CanJump = (controller.isGrounded);
 
@@ -110,6 +121,7 @@ public class Player : MonoBehaviour {
         moveDirection.y = moveDirection.y + (Physics.gravity.y * gravityScale);
         controller.Move(moveDirection * Time.deltaTime);
 
+        // CROUCHING
         // Toggle crouch by default
         if (playerInput.ToggleCrouch && !playerInput.Crouch)
         {
@@ -149,6 +161,16 @@ public class Player : MonoBehaviour {
         if (!IsCrouching && !HeadHit)
             controller.height = controllerHeight;
 
+    }
+
+    void Actions()
+    {
+        // Other actions besides movement here
+    }
+
+    void Animations()
+    {
+        animator.SetBool("IsAiming", playerInput.ReadyItem);
     }
 
 }

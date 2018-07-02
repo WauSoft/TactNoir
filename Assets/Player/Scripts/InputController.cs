@@ -13,12 +13,16 @@ public class InputController : MonoBehaviour {
     public bool Jump;
     public bool Run;
     public bool Crouch;
-    public float JoyCrouch;
     public bool ToggleRun;
     public bool ToggleCrouch;
-	
-	// Update is called once per frame
-	void Update ()
+    public bool Flashlight;
+    public bool ReadyItem;
+    public bool Pause;
+    public float JoyCrouch;
+    public float JoyReadyItem;
+
+    // Update is called once per frame
+    void Update ()
     {
         // Axis inputs
         Vertical = Input.GetAxis("Vertical");
@@ -31,6 +35,12 @@ public class InputController : MonoBehaviour {
         Crouch = Input.GetButton("Crouch");
         JoyCrouch = Input.GetAxis("Crouch");
         ToggleCrouch = Input.GetButtonDown("ToggleCrouch");
+        Flashlight = Input.GetButtonDown("Flashlight");
+        ReadyItem = Input.GetButton("Ready");
+        JoyReadyItem = Input.GetAxis("Ready");
+        Pause = Input.GetButtonDown("Pause");
+        
+        // Note: "GetButtonDown" = actions per button press | while "GetButton" = actions fire when button is held
 	}
 
 }

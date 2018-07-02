@@ -14,7 +14,8 @@ public class FPCamera : MonoBehaviour {
     public Transform target; // Target for camera to affix itself to
     public Transform pivot; // Pivot that the camera rotates around
 
-    public bool LockMouse;
+    //public bool LockMouse;
+    InputController playerInput;
 
     // Initialization
     void Start ()
@@ -22,25 +23,31 @@ public class FPCamera : MonoBehaviour {
         // Sets the offset to the target
         offset = target.position - transform.position;
         // Hides cursor and locks mouse to window when the game starts
-        if (LockMouse)
-        {
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
+        //Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+
+        playerInput = GameManager.Instance.InputController;
+
 	}
 	
 	void Update ()
     {
+        if(Time.timeScale != 0)
+        MouseLook();
+    }
+
+    void MouseLook()
+    {
         // Rotate player and camera with the x movement of the mouse
-        float horizontal = Input.GetAxis("Mouse X") * xSensitivity;
+        float horizontal = playerInput.MouseInput.x * xSensitivity;
         target.Rotate(0f, horizontal, 0f);
 
         // Rotate camera with y movement of mouse
-        float vertical = Input.GetAxis("Mouse Y") * ySensitivity;
+        float vertical = playerInput.MouseInput.y * ySensitivity;
         pivot.Rotate(-vertical, 0f, 0f);
 
         // Vertical look limit UP
-        if(pivot.rotation.eulerAngles.x > maxViewAngle && pivot.rotation.eulerAngles.x < 180f)
+        if (pivot.rotation.eulerAngles.x > maxViewAngle && pivot.rotation.eulerAngles.x < 180f)
         {
             pivot.rotation = Quaternion.Euler(maxViewAngle, transform.rotation.eulerAngles.y, 0);
         }
@@ -61,6 +68,6 @@ public class FPCamera : MonoBehaviour {
         transform.position = pivot.position - (rotation * offset);
         transform.rotation = rotation;
 
-	}
+    }
 
 }
