@@ -23,7 +23,7 @@ public class InputController : MonoBehaviour {
 
     // Update is called once per frame
     void Update ()
-    {
+    {       
         // Axis inputs
         Vertical = Input.GetAxis("Vertical");
         Horizontal = Input.GetAxis("Horizontal");

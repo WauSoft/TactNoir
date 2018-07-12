@@ -23,6 +23,7 @@ public class FlashlightScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+
         // Toggle Flashlight
         if (playerInput.Flashlight)
         {
